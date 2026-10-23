@@ -7,11 +7,14 @@
    photoCaption: short line shown under the photo ("" = none)
    music:        path to an audio file, e.g. "music/soft-piano.mp3".
                  Leave "" to use the gentle built-in piano melody.
+   musicStart:   second the song starts (and loops back to) — 86 is just
+                 before the middle chorus of "Shower".
 ------------------------------------------------------------- */
 const CONFIG = {
   photo: "",
   photoCaption: "",
-  music: "",
+  music: "music/shower.mp3",
+  musicStart: 86,
   floatingHearts: 12,
 };
 
@@ -190,13 +193,50 @@ class SoftPiano {
 
 /* ---------- audio file player (when CONFIG.music is set) ---------- */
 class FilePlayer {
-  constructor(src) {
+  constructor(src, start = 0) {
+    this.start = start;
+    this.started = false;
+    this.volume = 0.6;
     this.audio = new Audio(src);
-    this.audio.loop = true;
-    this.audio.volume = 0.45;
+    this.audio.preload = "auto";
+    // loop back to the chosen moment, not the very beginning
+    this.audio.addEventListener("ended", () => {
+      this.audio.currentTime = this.start;
+      this.audio.play();
+    });
   }
-  play()  { return this.audio.play(); }
-  pause() { this.audio.pause(); }
+
+  async play() {
+    if (!this.started) {
+      if (this.audio.readyState < 1) {
+        await new Promise((resolve) =>
+          this.audio.addEventListener("loadedmetadata", resolve, { once: true }));
+      }
+      this.audio.currentTime = this.start;
+      this.started = true;
+    }
+    this.audio.volume = 0;
+    await this.audio.play();
+    this.fade(this.volume, 2000);
+  }
+
+  pause() {
+    this.fade(0, 600, () => this.audio.pause());
+  }
+
+  fade(target, ms, done) {
+    clearInterval(this.fadeTimer);
+    const from = this.audio.volume;
+    const t0 = performance.now();
+    this.fadeTimer = setInterval(() => {
+      const k = Math.min((performance.now() - t0) / ms, 1);
+      this.audio.volume = from + (target - from) * k;
+      if (k === 1) {
+        clearInterval(this.fadeTimer);
+        if (done) done();
+      }
+    }, 30);
+  }
 }
 
 /* ---------- music button ---------- */
@@ -207,7 +247,7 @@ function setupMusic() {
 
   btn.addEventListener("click", async () => {
     // Created only on first press, so nothing ever plays by itself
-    if (!player) player = CONFIG.music ? new FilePlayer(CONFIG.music) : new SoftPiano();
+    if (!player) player = CONFIG.music ? new FilePlayer(CONFIG.music, CONFIG.musicStart) : new SoftPiano();
 
     try {
       if (playing) {
