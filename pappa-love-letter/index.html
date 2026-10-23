@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>For My Pappa ❤️</title>
+  <meta name="description" content="A letter of love and apology to my Pappa.">
+  <meta name="theme-color" content="#fdf6ec">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Gentle floating hearts (filled in by script.js) -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-heart" aria-hidden="true">
+        <span class="heart-glow"></span>
+        <svg class="heart-svg" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="heartGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#e3a9a4"/>
+              <stop offset="55%" stop-color="#c98483"/>
+              <stop offset="100%" stop-color="#a8605e"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#heartGradient)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+
+      <p class="hero-eyebrow fade-in" style="--delay: .4s">A little letter</p>
+      <h1 id="hero-title" class="hero-title fade-in" style="--delay: .8s">For my Pappa</h1>
+      <p class="hero-subtitle fade-in" style="--delay: 1.2s">
+        Some words I want you to hear, straight from my heart.
+      </p>
+
+      <button id="revealBtn" class="btn-heart fade-in" style="--delay: 1.6s"
+              type="button" aria-expanded="false" aria-controls="letter">
+        A message from my heart ❤️
+      </button>
+    </section>
+
+    <!-- ===================== LETTER (revealed on click) ===================== -->
+    <section id="letter" class="letter-section" hidden aria-label="My message to Pappa">
+
+      <!-- Optional photograph: set CONFIG.photo in js/script.js -->
+      <figure id="photoFrame" class="photo-frame" hidden>
+        <img id="photo" src="" alt="Pappa and me">
+        <figcaption id="photoCaption"></figcaption>
+      </figure>
+
+      <article class="letter-card">
+        <span class="letter-ornament" aria-hidden="true">❦</span>
+
+        <!-- ✏️ Edit the message below freely. Keep class="line" on each part
+             so it fades in gently; --i controls the order. -->
+        <p class="line" style="--i: 0">
+          <span class="highlight-sorry">I'm sorry, Pappa.</span>
+        </p>
+        <p class="line" style="--i: 1">
+          I cannot come there to pick you up today, and I'm truly sorry for that.
+        </p>
+
+        <p class="line" style="--i: 2">
+          You are my <strong>lifetime responsibility</strong>. No matter what happens in life,
+          I will always care for you, stand beside you, and do my best to look after you.
+        </p>
+
+        <p class="line" style="--i: 3">
+          <span class="highlight-sorry">I'm sorry, Pappa.</span>
+        </p>
+
+        <p class="line" style="--i: 4">
+          <span class="highlight-love">I love you. <span aria-hidden="true">❤️</span></span>
+        </p>
+
+        <!-- ✏️ Add your name if you like, e.g. "— Yours, always, Risa" -->
+        <p class="line signature" style="--i: 5">— Yours, always</p>
+      </article>
+    </section>
+
+    <!-- ===================== ILLUSTRATION ===================== -->
+    <section class="walk reveal" aria-labelledby="walk-caption">
+      <svg class="walk-svg" viewBox="0 0 400 240" role="img"
+           aria-labelledby="walk-title">
+        <title id="walk-title">Two people walking hand in hand toward the sunset</title>
+
+        <!-- setting sun -->
+        <circle class="walk-sun" cx="322" cy="150" r="58"/>
+        <!-- path / ground -->
+        <path class="walk-ground" d="M10 212 Q200 196 390 212"/>
+
+        <g class="walk-figures">
+          <!-- Me -->
+          <circle cx="160" cy="62" r="15"/>
+          <path d="M145 84 Q160 77 175 84 L179 142 Q160 148 141 142 Z"/>
+          <line x1="152" y1="140" x2="143" y2="207" class="limb-lg"/>
+          <line x1="168" y1="140" x2="181" y2="207" class="limb-lg"/>
+          <line x1="148" y1="90"  x2="137" y2="134" class="limb-md"/>
+          <line x1="173" y1="90"  x2="190" y2="129" class="limb-md"/>
+
+          <!-- Her -->
+          <path class="walk-hair" d="M208 68 Q207 49 222 49 Q237 49 236 68 L239 90 Q230 85 222 85 Q214 85 205 90 Z"/>
+          <circle cx="222" cy="66" r="13"/>
+          <path d="M211 88 Q222 82 233 88 L244 160 Q222 166 200 160 Z"/>
+          <line x1="215" y1="158" x2="209" y2="207" class="limb-md"/>
+          <line x1="229" y1="158" x2="237" y2="207" class="limb-md"/>
+          <line x1="212" y1="94"  x2="191" y2="129" class="limb-sm"/>
+          <line x1="232" y1="94"  x2="242" y2="134" class="limb-sm"/>
+        </g>
+
+        <!-- a small heart rising between them -->
+        <path class="walk-heart"
+              transform="translate(180 30) scale(.9)"
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <p id="walk-caption" class="walk-caption">
+        Wherever life takes us,<br>
+        I'll be walking beside you, holding your hand.
+      </p>
+    </section>
+
+    <!-- ===================== FINAL MESSAGE ===================== -->
+    <section class="finale reveal" aria-labelledby="finale-title">
+      <h2 id="finale-title" class="finale-title">
+        I LOVE YOU, PAPPA <span class="finale-heart" aria-hidden="true">❤️</span>
+      </h2>
+      <p class="finale-sub">You will always have a special place in my heart.</p>
+    </section>
+
+  </main>
+
+  <!-- Music toggle: music only starts when pressed -->
+  <button id="musicBtn" class="music-btn" type="button"
+          aria-pressed="false" aria-label="Play soft music">
+    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+    <span class="music-label">Music</span>
+  </button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
